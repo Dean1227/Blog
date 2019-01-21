@@ -1,0 +1,138 @@
+{% extends 'base_web.html' %}
+{% block title %}
+    首页_落幕丶丶个人博客 - 一个分享Python技术经验的个人博客网站
+{% endblock %}
+
+{% block meta %}
+    <meta name="keywords" content="个人博客,落幕丶丶个人博客" />
+    <meta name="description" content="落幕丶丶个人博客，是一个分享Python技术经验的个人博客网站" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+
+{% block css %}
+    <link href="/static/css/base_web.css" rel="stylesheet">
+    <link href="/static/css/index_web.css" rel="stylesheet">
+    <link href="/static/css/info_web.css" rel="stylesheet">
+    <link href="/static/css/m_web.css" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/comm.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../static/js/modernizr.js"></script>
+    <![endif]-->
+{% endblock %}
+
+{% block header %}
+<header class="header-navigation" id="header">
+  <nav>
+    <div class="logo"><a href="/">落幕丶丶个人博客</a></div>
+    <h2 id="mnavh"><span class="navicon"></span></h2>
+    <ul id="starlist">
+        <li><a href="{% url 'web:index' %}">网站首页</a></li>
+        <li><a href="{% url 'web:list'%}">文章日记</a></li>
+        <li><a href="{% url 'web:gbook' %}">留言</a></li>
+        <li><a href="{% url 'web:about' %}">关于我</a></li>
+        {% if  name %}
+        <li><a href="/app/index/">数据管理</a></li>
+        {% endif %}
+    </ul>
+  </nav>
+</header>
+{% endblock %}
+
+{% block about %}
+      <div class="about_me">
+        <h2>关于我</h2>
+        <ul>
+          <i><img src="/static/images/4.jpg"></i>
+          <p><b>落幕丶丶</b>，一个草根站长！09年入行。一直潜心研究web前端技术，一边工作一边积累经验，分享一些个人博客模板，以及SEO优化等心得。</p>
+        </ul>
+      </div>
+{% endblock %}
+
+
+{% block search %}
+    <div class="search">
+
+      <form action="" method="post" name="searchform" id="searchform">
+          {% csrf_token %}
+        <input name="keyboard" id="keyboard" class="input_text" placeholder="{{key}}" value="" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
+        <!--<input name="show" value="title" type="hidden">-->
+        <!--<input name="tempid" value="1" type="hidden">-->
+        <!--<input name="tbname" value="news" type="hidden">-->
+        <input name="Submit" class="input_submit" value="搜索" type="submit">
+
+      </form><p>
+    </div>
+{% endblock %}
+
+
+{% block fenlei %}
+    <div class="fenlei">
+        <h2>文章分类</h2>
+        <ul>
+            {% for cat in cats %}
+            <li><a href="">{{ cat.c_name }}</a></li>
+            {% endfor %}
+
+        </ul>
+      </div>
+{% endblock %}
+
+{% block tuijian %}
+    <div class="tuijian">
+        <h2>站长推荐</h2>
+        <ul>
+          <li><a href="/">你是什么人便会遇上什么人</a></li>
+          <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+          <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+          <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+          <li><a href="/">你是什么人便会遇上什么人</a></li>
+          <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+          <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+          <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+        </ul>
+      </div>
+{% endblock %}
+{% block tuijian2 %}
+    <div class="tuijian">
+      <h2>点击排行</h2>
+      <ul>
+        <li><a href="/">你是什么人便会遇上什么人</a></li>
+        <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+        <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+        <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+        <li><a href="/">你是什么人便会遇上什么人</a></li>
+        <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
+        <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
+        <li><a href="/">个人博客模板《绅士》后台管理</a></li>
+      </ul>
+    </div>
+{% endblock %}
+{% block cloud %}
+     <div class="cloud">
+      <h2>标签云</h2>
+      <ul>
+        <a href="/">陌上花开</a> <a href="/">校园生活</a> <a href="/">html5</a> <a href="/">SumSung</a> <a href="/">青春</a> <a href="/">温暖</a> <a href="/">阳光</a> <a href="/">三星</a><a href="/">索尼</a> <a href="/">华维荣耀</a> <a href="/">三星</a> <a href="/">索尼</a>
+      </ul>
+    </div>
+{% endblock %}
+
+{% block guanzhu %}
+    <div class="guanzhu">
+      <h2>关注我 么么哒</h2>
+      <ul>
+        <img src="/static/images/wx.jpg">
+      </ul>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    <footer>
+        <p>Design by <a href="http://www.yangqq.com" target="_blank">杨青个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
+    </footer>
+    <a href="#" class="cd-top">Top</a>
+{% endblock %}

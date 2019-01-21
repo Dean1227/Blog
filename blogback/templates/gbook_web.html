@@ -1,0 +1,70 @@
+{% extends 'base_main_web.html' %}
+
+{% block about %}
+{% endblock %}
+
+{% block tuijian2 %}
+{% endblock %}
+
+{% block content %}
+<div class="gbook">
+  {% for message in messages %}
+  <div class="fb">
+    <ul>
+      <p class="fbtime"><span style="width: 120px;"> {{ message.create_time }} </span>{{ message.id }}L {{ message.name }}</p>
+      <p class="fbinfo">{{ message.content }}</p>
+    </ul>
+  </div>
+  {% endfor %}
+  <div class="pagelist">
+      <ul>
+        <p>当前第<font color="red">{{ messages.number }}</font>页，共{{ messages.paginator.num_pages }}页</p>
+      </ul>
+  </div>
+  <div class="pagelist">
+    {% if messages.has_previous %}
+        <a aria-label="Previous" href="{% url 'web:gbook' %}?page={{ messages.previous_page_number }}"> <span aria-hidden="true">&laquo;</span> </a>
+    {% endif %}
+
+    {% for i in messages.paginator.page_range %}
+        <a href="{% url 'web:gbook' %}?page={{ i }}">{{ i }}</a>
+    {% endfor %}
+
+    {% if messages.has_next %}
+        <a href="{% url 'web:gbook' %}?page={{ messages.next_page_number }}" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a>
+    {% endif %}
+  </div>
+  <div class="gbox">
+        <form action="" method="post" name="form1" id="form1">
+          {% csrf_token %}
+          <p> <strong>来说点儿什么吧...</strong></p>
+          <p><span><font color="red">*</font>您的昵称:</span>
+            <input name="name" type="text" id="name">
+            </p>
+          <p><span><font color="red">*</font>联系邮箱:</span>
+            <input name="email" type="text" id="email">
+            </p>
+          <p><span class="tnr"><font color="red">*</font>留言内容:</span>
+            <textarea name="lytext" cols="60" rows="12" id="lytext"></textarea>
+          </p>
+          <p>
+            <input type="submit" name="Submit3" value="提交">
+          </p>
+          {% if errors.name %}
+            <p>错误提示：<font color="red">{{ errors.name }}</font></p>
+          {% endif %}
+          {% if errors.email %}
+            <p>错误提示：<font color="red">{{ errors.email }}</font></p>
+          {% endif %}
+          {% if errors.lytext %}
+            <p>错误提示：<font color="red">{{ errors.lytext }}</font></p>
+          {% endif %}
+
+
+
+
+
+        </form>
+      </div>
+</div>
+{% endblock %}

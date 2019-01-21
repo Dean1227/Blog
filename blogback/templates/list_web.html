@@ -1,0 +1,30 @@
+{% extends 'base_main_web.html' %}
+
+{% block about %}
+{% endblock %}
+
+{% block content %}
+
+    {% for art in arts %}
+      <li><i><a href="/"><img src="/media/{{ art.icon|safe }}"></a></i>
+
+        <h3><a href="{% url 'web:info' art.id %}">{{ art.title }}</a></h3>
+        <p><a href="{% url 'web:info' art.id %}">{% autoescape off %}{{ art.content }}{% endautoescape %}
+        </a></p>
+      </li>
+    {% endfor %}
+
+    <div class="pagelist">
+      {% if arts.has_previous %}
+        <a aria-label="Previous" href="{% url 'web:list' %}?page={{ arts.previous_page_number }}"> <span aria-hidden="true">&laquo;</span> </a>
+      {% endif %}
+
+      {% for i in arts.paginator.page_range %}
+        <a href="{% url 'web:list' %}?page={{ i }}">{{ i }}</a>
+      {% endfor %}
+
+      {% if arts.has_next %}
+        <a href="{% url 'web:list' %}?page={{ arts.next_page_number }}" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a>
+      {% endif %}
+    </div>
+{% endblock %}
